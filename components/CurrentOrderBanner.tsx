@@ -6,10 +6,11 @@ interface CurrentOrderBannerProps {
   mode: 'sleep' | 'workout' | 'normal';
 }
 
+// Updated to use green background and black text for all modes
 const modeStyles = {
-  sleep: 'bg-purple-100 text-purple-800',
-  workout: 'bg-red-100 text-red-800',
-  normal: 'bg-green-100 text-green-800',
+  sleep: 'bg-green-500 text-black',
+  workout: 'bg-green-500 text-black',
+  normal: 'bg-green-500 text-black',
 };
 
 const modeLabels = {
@@ -20,7 +21,9 @@ const modeLabels = {
 
 export default function CurrentOrderBanner({ mode }: CurrentOrderBannerProps) {
   return (
-    <div className={`w-full py-2 px-4 text-center font-semibold shadow-sm ${modeStyles[mode]} rounded-xl`}>
+    <div
+      className={`w-full py-4 px-6 text-center text-lg md:text-xl font-bold shadow-md rounded-2xl ${modeStyles[mode]}`}
+    >
       Current Mode: {modeLabels[mode]}
     </div>
   );

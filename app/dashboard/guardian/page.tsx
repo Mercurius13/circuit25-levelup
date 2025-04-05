@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic';
 
 const LiveMap = dynamic(() => import('@/components/LiveMap'), { ssr: false });
 
-const CAMERA_STREAM_URL = 'http://192.168.1.100:81/stream'; // Replace with your ESP32-CAM stream URL
-const GPS_API_URL = '/api/gps'; // Replace with your GPS endpoint
+const CAMERA_STREAM_URL = '/api/camera';
+const GPS_API_URL = '/api/gps';
 
 export default function GuardianDashboard() {
   const [position, setPosition] = useState<[number, number]>([0, 0]);
@@ -24,25 +24,35 @@ export default function GuardianDashboard() {
   }
 
   useEffect(() => {
-    fetchGPS(); // initial load
-    const interval = setInterval(fetchGPS, 90000); // update every 90 sec
+    fetchGPS();
+    const interval = setInterval(fetchGPS, 90000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6 p-4">
-      {/* Camera Feed */}
-      <div className="w-full max-w-2xl rounded-2xl overflow-hidden shadow-md border">
-        <img
-          src={CAMERA_STREAM_URL}
-          alt="Live Camera Feed"
-          className="w-full h-auto"
-        />
+    <div className="h-screen w-full flex flex-col bg-gradient-to-b from-slate-50 to-slate-200">
+      {/* Header */}
+      <div className="py-4 text-center text-3xl font-bold text-slate-800 shadow">
+        Guardian Dashboard
       </div>
 
-      {/* Live Map */}
-      <div className="w-full max-w-2xl h-96 overflow-hidden shadow-md border rounded-2xl">
-        <LiveMap position={position} />
+      {/* Main Content */}
+      <div className="flex-1 grid grid-rows-2 md:grid-cols-2 md:grid-rows-1">
+        {/* Camera Feed */}
+        <div className="w-full h-full border border-slate-300 bg-white overflow-hidden">
+          <iframe
+            src={CAMERA_STREAM_URL}
+            className="w-full h-full"
+            title="ESP32-CAM Stream"
+            allow="autoplay"
+            frameBorder="0"
+          />
+        </div>
+
+        {/* Live Map */}
+        <div className="w-full h-full border border-slate-300 bg-white overflow-hidden">
+          <LiveMap position={position} />
+        </div>
       </div>
     </div>
   );
