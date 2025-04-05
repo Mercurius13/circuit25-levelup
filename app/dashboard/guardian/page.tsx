@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import LiveMap from '@/components/LiveMap';
+import dynamic from 'next/dynamic';
+
+const LiveMap = dynamic(() => import('@/components/LiveMap'), { ssr: false });
 
 const CAMERA_STREAM_URL = 'http://192.168.1.100:81/stream'; // Replace with your ESP32-CAM stream URL
 const GPS_API_URL = '/api/gps'; // Replace with your GPS endpoint
