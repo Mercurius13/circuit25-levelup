@@ -18,5 +18,15 @@
     "height": "170",
     "weight": "70",
     "role": "guardian"
+  },
+  {
+    "name": "arnav",
+    "email": "arnavbhandari1609@gmail.com",
+    "password": "6969",
+    "age": "20",
+    "country": "India",
+    "height": "167",
+    "weight": "60",
+    "role": "user"
   }
 ]
