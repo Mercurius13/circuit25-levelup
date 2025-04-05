@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Anokhi",
+    "email": "anokhi@gmail.com",
+    "password": "1234567890",
+    "age": "18",
+    "country": "India",
+    "height": "167",
+    "weight": "60",
+    "role": "user"
+  }
+]
