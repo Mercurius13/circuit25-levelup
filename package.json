@@ -11,6 +11,7 @@
   "dependencies": {
     "circuit25-levelup": "file:",
     "clsx": "^2.1.1",
+    "firebase": "^11.6.0",
     "framer-motion": "^12.6.3",
     "install": "^0.13.0",
     "lucide-react": "^0.487.0",

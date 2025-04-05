@@ -1,57 +1,56 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readFile, writeFile } from 'fs/promises';
-import path from 'path';
-
-const filePath = path.join(process.cwd(), 'data', 'users.json');
-
-type User = {
-  name: string;
-  email: string;
-  password: string;
-  age?: string;
-  country?: string;
-  height?: string;
-  weight?: string;
-  role?: 'user' | 'guardian';
-};
+import { auth, db } from '@/lib/firebaseConfig';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { mode, ...userData } = body;
 
-  let users: User[] = [];
-
-  try {
-    const fileData = await readFile(filePath, 'utf-8');
-    users = JSON.parse(fileData);
-  } catch (err) {
-    console.log('No existing file. Creating new user list.');
-  }
-
-  const existingUser = users.find(u => u.email === userData.email);
+  const { name, email, password, age, country, height, weight, role } = userData;
 
   if (mode === 'signup') {
-    if (existingUser) {
-      return NextResponse.json({ message: 'User already exists.' }, { status: 400 });
-    }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-    // Save the user including their role
-    users.push(userData);
-    await writeFile(filePath, JSON.stringify(users, null, 2));
-    return NextResponse.json({ message: 'Signup successful!' });
+      await setDoc(doc(db, 'users', user.uid), {
+        name,
+        email,
+        age,
+        country,
+        height,
+        weight,
+        role: role || 'user',
+        createdAt: new Date().toISOString(),
+      });
+
+      return NextResponse.json({ message: 'Signup successful!' });
+    } catch (error: any) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 
   if (mode === 'login') {
-    if (!existingUser || existingUser.password !== userData.password) {
-      return NextResponse.json({ message: 'Invalid credentials' }, { status: 401 });
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+
+      if (!userDoc.exists()) {
+        return NextResponse.json({ message: 'User data not found' }, { status: 404 });
+      }
+
+      const userData = userDoc.data();
+
+      return NextResponse.json({
+        message: `Welcome back, ${userData.name}!`,
+        role: userData.role,
+      });
+    } catch (error: any) {
+      return NextResponse.json({ message: error.message }, { status: 401 });
     }
-  
-    return NextResponse.json({
-      message: `Welcome back, ${existingUser.name}!`,
-      role: existingUser.role,
-    });
   }
-  
 
   return NextResponse.json({ message: 'Invalid request' }, { status: 400 });
 }
