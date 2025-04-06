@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 
 const LiveMap = dynamic(() => import('@/components/LiveMap'), { ssr: false });
 
-const CAMERA_STREAM_URL = '/api/camera';
 const GPS_API_URL = '/api/gps';
 
 export default function GuardianDashboard() {
@@ -37,18 +36,7 @@ export default function GuardianDashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 grid grid-rows-2 md:grid-cols-2 md:grid-rows-1">
-        {/* Camera Feed */}
-        <div className="w-full h-full border border-slate-300 bg-white overflow-hidden">
-          <iframe
-            src={CAMERA_STREAM_URL}
-            className="w-full h-full"
-            title="ESP32-CAM Stream"
-            allow="autoplay"
-            frameBorder="0"
-          />
-        </div>
-
+      <div className="flex-1 grid grid-rows-1 md:grid-cols-1 md:grid-rows-1">
         {/* Live Map */}
         <div className="w-full h-full border border-slate-300 bg-white overflow-hidden">
           <LiveMap position={position} />

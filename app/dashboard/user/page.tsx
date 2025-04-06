@@ -8,8 +8,11 @@ import CurrentOrderBanner from '@/components/CurrentOrderBanner';
 import dynamic from 'next/dynamic';
 import StepsChart from '@/components/StepsBarChart';
 
-const CycleGraph = dynamic(() => import('@/components/CycleGraph'));
+// Dynamically import your components
+const CycleGraph = dynamic(() => import('@/components/CycleGraph'), { ssr: false });
+import StressStrainCalculator from '@/components/StressStrainCalculator';
 
+// Metrics top section
 const metricstop = [
   {
     id: 'heart',
@@ -31,6 +34,7 @@ const metricstop = [
   }
 ];
 
+// Metrics bottom section
 const metricsbottom = [
   {
     id: 'sleep',
@@ -57,13 +61,14 @@ export default function UserDashboard() {
   const [mode, setMode] = useState<'sleep' | 'workout' | 'normal'>('normal');
 
   const handleExpand = (id: string) => {
-    setExpanded(prev => (prev === id ? null : id));
+    setExpanded(prev => (prev === id ? null : id)); // Toggle expanded state
   };
 
   useEffect(() => {
     document.body.style.overflow = expanded ? 'hidden' : '';
   }, [expanded]);
 
+  // Content map to show specific content for each metric
   const contentMap: Record<string, React.ReactNode> = {
     heart: (
       <div>
@@ -119,18 +124,22 @@ export default function UserDashboard() {
         <li>Check emergency contacts if needed</li>
       </ul>
     ),
+    'stress-strain': <StressStrainCalculator /> // Injecting the StressStrainCalculator component here
   };
 
+  // Render MetricCard with expand functionality
   const renderMetricCard = (
     id: string,
     title: string,
     icon: React.ReactNode,
-    defaultValue?: string | number
+    defaultValue?: string | number,
+    content?: React.ReactNode
   ) => {
     const isExpanded = expanded === id;
 
     return (
       <div key={id} className="relative flex flex-col justify-between h-full">
+        {/* Metric card for non-expanded state */}
         {!isExpanded && (
           <MetricCard
             id={id}
@@ -143,6 +152,7 @@ export default function UserDashboard() {
           />
         )}
 
+        {/* Expanded state with animation and content */}
         <AnimatePresence>
           {isExpanded && (
             <>
@@ -151,7 +161,7 @@ export default function UserDashboard() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                onClick={() => setExpanded(null)}
+                onClick={() => setExpanded(null)} // Close when clicked outside
               />
               <motion.div
                 className="fixed inset-0 z-40 flex items-center justify-center p-4"
@@ -167,7 +177,7 @@ export default function UserDashboard() {
                   defaultValue={defaultValue}
                   expanded={true}
                   onClick={() => handleExpand(id)}
-                  content={contentMap[id]} // 🔥 Expanded content
+                  content={content || contentMap[id]} // Inject dynamic content (StressStrainCalculator for stress-strain)
                 />
               </motion.div>
             </>
@@ -199,9 +209,20 @@ export default function UserDashboard() {
       </div>
 
       {/* Bottom Metrics */}
-      <div className="grid grid-cols-3 gap-6 w-full">
+      <div className="grid grid-cols-3 gap-6 w-full mb-8">
         {metricsbottom.map(metric =>
           renderMetricCard(metric.id, metric.title, metric.icon, metric.defaultValue)
+        )}
+      </div>
+
+      {/* Stress & Strain Metric Card at the Bottom */}
+      <div className="w-full mt-8">
+        {renderMetricCard(
+          'stress-strain',
+          'Stress & Strain',
+          <Droplet className="w-8 h-8 text-pink-600" />,
+          '',
+          <StressStrainCalculator />
         )}
       </div>
     </div>
