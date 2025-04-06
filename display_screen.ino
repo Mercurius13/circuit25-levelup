@@ -1,16 +1,14 @@
 #include <Wire.h>
 #include "MAX30100_PulseOximeter.h"
-#include <U8g2lib.h>
+#include <U8x8lib.h>
 
-#define REPORTING_PERIOD_MS 500  // faster updates
+#define REPORTING_PERIOD_MS 500
 
 PulseOximeter pox;
 uint32_t tsLastReport = 0;
 
-// OLED Setup (using I2C)
-U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
+U8X8_SSD1306_128X64_NONAME_HW_I2C u8x8;
 
-// Callback for heartbeat detection (optional)
 void onBeatDetected() {
   Serial.println("* Beat detected");
 }
@@ -19,18 +17,23 @@ void setup() {
   Serial.begin(115200);
   delay(1000);
 
-  // Initialize OLED
-  u8g2.begin();
+  u8x8.begin();
+  u8x8.setFont(u8x8_font_8x13_1x2_f);
+  u8x8.drawString(0, 0, "Initializing...");
 
-  // Initialize MAX30100
   if (!pox.begin()) {
-    Serial.println("❌ MAX30100 init failed. Check wiring.");
+    Serial.println("❌ MAX30100 init failed.");
+    u8x8.clear();
+    u8x8.drawString(0, 2, "Sensor Failed!");
     while (1);
   }
-  Serial.println("✅ MAX30100 ready");
 
   pox.setIRLedCurrent(MAX30100_LED_CURR_7_6MA);
   pox.setOnBeatDetectedCallback(onBeatDetected);
+
+  Serial.println("✅ MAX30100 ready");
+  u8x8.clearDisplay();
+  u8x8.drawString(0, 0, "Waiting...");
 }
 
 void loop() {
@@ -40,31 +43,32 @@ void loop() {
     float hr = pox.getHeartRate();
     float spo2 = pox.getSpO2();
 
-    u8g2.clearBuffer();
+    Serial.println("--------");
+    Serial.print("Raw HR: ");
+    Serial.println(hr);
+    Serial.print("Raw SpO2: ");
+    Serial.println(spo2);
 
-    // Heart Icon
-    u8g2.setFont(u8g2_font_open_iconic_embedded_1x_t);
-    u8g2.drawGlyph(10, 20, 0x0048);
+    bool validHR = hr > 40 && hr < 200;
+    bool validSpO2 = spo2 > 85 && spo2 <= 100;
 
-    // Heart Rate
-    u8g2.setFont(u8g2_font_ncenB14_tr);
-    u8g2.setCursor(30, 20);
-    u8g2.print("HR: ");
-    if (hr > 30 && hr < 220)
-      u8g2.print((int)hr);
-    else
-      u8g2.print("--");
+    u8x8.clearDisplay();
 
-    // SpO2
-    u8g2.setCursor(10, 50);
-    u8g2.print("SpO2: ");
-    if (spo2 > 50 && spo2 <= 100)
-      u8g2.print((int)spo2);
-    else
-      u8g2.print("--");
-    u8g2.print(" %");
+    if (validHR && validSpO2) {
+      u8x8.setCursor(0, 0);
+      u8x8.print("HR: ");
+      u8x8.print((int)hr);
+      u8x8.print(" bpm");
 
-    u8g2.sendBuffer();
+      u8x8.setCursor(0, 2);
+      u8x8.print("SpO2: ");
+      u8x8.print((int)spo2);
+      u8x8.print(" %");
+    } else {
+      u8x8.setCursor(0, 1);
+      u8x8.print("❌ Net Issue");
+    }
+
     tsLastReport = millis();
   }
 }
