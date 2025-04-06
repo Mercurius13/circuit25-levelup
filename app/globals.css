@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+/* Set font globally */
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Switched color palette: lavender background, blush accent */
+:root {
+  --background: #b388eb; /* lavender background */
+  --foreground: #3c3c3c; /* soft charcoal text */
+  --accent: #fff1f5;     /* blush pink */
+  --highlight: #a0e7e5;  /* soft teal */
+  --card-bg: #f3d1ec;    /* light blush-lavender mix */
+}
+
+/* Dark mode with switched tones */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #800050;    /* soft plum */
+    --foreground: #f5e9f2;    /* light pink/white text */
+    --accent: #2b1b2f;        /* deep lavender as accent */
+    --highlight: #14ebebcd;     /* teal */
+    --card-bg: #141616cd;       /* muted lavender */
+  }
+}
+
+/* Tailwind-like custom theme variables (optional use in JS/CSS-in-JS) */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Quicksand', sans-serif;
+  --font-mono: 'Courier New', monospace;
+}
