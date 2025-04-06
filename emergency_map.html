@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c731871e3da9dffc65dd53b0947e6d8d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_c731871e3da9dffc65dd53b0947e6d8d" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_c731871e3da9dffc65dd53b0947e6d8d = L.map(
+                "map_c731871e3da9dffc65dd53b0947e6d8d",
+                {
+                    center: [19.15500856564224, 72.79748851813686],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_43d10a1f1d1aaacf43df1b6e742e0a80 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_43d10a1f1d1aaacf43df1b6e742e0a80.addTo(map_c731871e3da9dffc65dd53b0947e6d8d);
+        
+    
+            var marker_7004da0d73acc5b5de904632746e9f03 = L.marker(
+                [19.15500856564224, 72.79748851813686],
+                {
+}
+            ).addTo(map_c731871e3da9dffc65dd53b0947e6d8d);
+        
+    
+            var icon_34695d0add443b13f7d4ad1a9d13dc8c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_83d01fb1d2571ca2d1e81bc60c5f40e3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_77100f2d6004aeaab257d960256bcb7a = $(`<div id="html_77100f2d6004aeaab257d960256bcb7a" style="width: 100.0%; height: 100.0%;">Emergency</div>`)[0];
+                popup_83d01fb1d2571ca2d1e81bc60c5f40e3.setContent(html_77100f2d6004aeaab257d960256bcb7a);
+            
+        
+
+        marker_7004da0d73acc5b5de904632746e9f03.bindPopup(popup_83d01fb1d2571ca2d1e81bc60c5f40e3)
+        ;
+
+        
+    
+    
+                marker_7004da0d73acc5b5de904632746e9f03.setIcon(icon_34695d0add443b13f7d4ad1a9d13dc8c);
+            
+    
+            var marker_b4502ddae4cb24f67d4b62a8ee8c5811 = L.marker(
+                [19.1244929, 72.8303846],
+                {
+}
+            ).addTo(map_c731871e3da9dffc65dd53b0947e6d8d);
+        
+    
+            var icon_50c4cfd867d30e70fcd3de62edd13eb7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_533966cea96940e1eb7cb0ae984dfa77 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_df5208a9a36feb3b3cb4faea0bc407a3 = $(`<div id="html_df5208a9a36feb3b3cb4faea0bc407a3" style="width: 100.0%; height: 100.0%;">Versova Police Station (4836.04m)</div>`)[0];
+                popup_533966cea96940e1eb7cb0ae984dfa77.setContent(html_df5208a9a36feb3b3cb4faea0bc407a3);
+            
+        
+
+        marker_b4502ddae4cb24f67d4b62a8ee8c5811.bindPopup(popup_533966cea96940e1eb7cb0ae984dfa77)
+        ;
+
+        
+    
+    
+                marker_b4502ddae4cb24f67d4b62a8ee8c5811.setIcon(icon_50c4cfd867d30e70fcd3de62edd13eb7);
+            
+    
+            var marker_4434cd55d1ad55e07f5324dfcf966437 = L.marker(
+                [19.1204984, 72.8480663],
+                {
+}
+            ).addTo(map_c731871e3da9dffc65dd53b0947e6d8d);
+        
+    
+            var icon_bce9c6109febf9ee0e9144b3f71820f6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_46d1c656de7dc502cf047d151bfdc135 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9aa69a5b2375722576b83324b61818f5 = $(`<div id="html_9aa69a5b2375722576b83324b61818f5" style="width: 100.0%; height: 100.0%;">Andheri Police Station (6550.29m)</div>`)[0];
+                popup_46d1c656de7dc502cf047d151bfdc135.setContent(html_9aa69a5b2375722576b83324b61818f5);
+            
+        
+
+        marker_4434cd55d1ad55e07f5324dfcf966437.bindPopup(popup_46d1c656de7dc502cf047d151bfdc135)
+        ;
+
+        
+    
+    
+                marker_4434cd55d1ad55e07f5324dfcf966437.setIcon(icon_bce9c6109febf9ee0e9144b3f71820f6);
+            
+    
+            var marker_0aab2319314c0653164ac0a1d3eb6651 = L.marker(
+                [19.0965, 72.8502],
+                {
+}
+            ).addTo(map_c731871e3da9dffc65dd53b0947e6d8d);
+        
+    
+            var icon_9f913cc464a62a41bee99e602928087d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0aafcf16c15b35c709d208eda0a863a6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a4385e832dc72e052bc9064f08f36d27 = $(`<div id="html_a4385e832dc72e052bc9064f08f36d27" style="width: 100.0%; height: 100.0%;">Vile Parle Police Station (8526.58m)</div>`)[0];
+                popup_0aafcf16c15b35c709d208eda0a863a6.setContent(html_a4385e832dc72e052bc9064f08f36d27);
+            
+        
+
+        marker_0aab2319314c0653164ac0a1d3eb6651.bindPopup(popup_0aafcf16c15b35c709d208eda0a863a6)
+        ;
+
+        
+    
+    
+                marker_0aab2319314c0653164ac0a1d3eb6651.setIcon(icon_9f913cc464a62a41bee99e602928087d);
+            
+    
+            var poly_line_d37d338253da5361d47c777d5b2cd677 = L.polyline(
+                [[19.15500856564224, 72.79748851813686], [19.1244929, 72.8303846]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_c731871e3da9dffc65dd53b0947e6d8d);
+        
+    
+            poly_line_d37d338253da5361d47c777d5b2cd677.bindTooltip(
+                `<div>
+                     Path to Nearest Station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
