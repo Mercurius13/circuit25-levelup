@@ -1,0 +1,24 @@
+# Virtual environment
+venv/
+env/
+.env/
+myenv/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# DB files
+*.sqlite3
+*.db
+
+# Packaging
+*.egg-info/
+dist/
+build/
+
+# VS Code
+.vscode/
