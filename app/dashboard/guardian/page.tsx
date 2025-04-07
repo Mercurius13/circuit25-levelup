@@ -42,6 +42,18 @@ export default function GuardianDashboard() {
           <LiveMap position={position} />
         </div>
       </div>
+
+      {/* Button to external link */}
+      <div className="py-4 text-center">
+        <a
+          href="http://172.20.10.8/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition"
+        >
+          Open Live Feed
+        </a>
+      </div>
     </div>
   );
 }
